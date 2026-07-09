@@ -1,7 +1,7 @@
-import { createClient } from '@/lib/supabase/client';
+import { createClient } from '@/lib/supabase/server';
 
 export default async function HomePage() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: categories } = await supabase.from('categories').select('*').order('display_order');
   const { data: products } = await supabase.from('products').select('*, categories(*)').limit(8);
 
